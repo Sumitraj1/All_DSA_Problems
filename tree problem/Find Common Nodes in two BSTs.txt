@@ -1,0 +1,64 @@
+Given two Binary Search Trees. Find the nodes that are common in both of them, ie- find the intersection of the two BSTs.
+
+Note: Return the common nodes in sorted order.
+
+Example 1:
+
+Input:
+BST1:
+                  5
+               /     \
+             1        10
+           /   \      /
+          0     4    7
+                      \
+                       9
+BST2:
+                10 
+              /    \
+             7     20
+           /   \ 
+          4     9
+Output: 4 7 9 10
+
+Example 2:
+
+Input:
+BST1:
+     10
+    /  \
+   2   11
+  /  \
+ 1   3
+BST2:
+       2
+     /  \
+    1    3
+Output: 1 2 3
+
+class Solution
+{
+    //Function to find the nodes that are common in both BST.
+	public static ArrayList<Integer> findCommon(Node root1,Node root2)
+    {
+        //code here
+         HashSet<Integer> set = new HashSet<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        tree1(root1,set);
+        tree2(root2,set,list);
+        return list;
+    }
+    public static void tree1(Node root,HashSet<Integer>set){
+        if(root==null)return ;
+        tree1(root.left,set);
+        set.add(root.data);
+        tree1(root.right,set);
+    }
+    public static void tree2(Node root,HashSet<Integer>set,ArrayList<Integer>list){
+        if(root==null)return;
+        tree2(root.left,set,list);
+        if(set.contains(root.data))list.add(root.data);
+        tree2(root.right,set,list);
+    
+    }
+}

@@ -1,0 +1,69 @@
+Maximum Element in a Bitonic Array
+A bitonic array is an array that is first increasing and then decreasing. Given an array of numbers which is first increasing and then decreasing, find the maximum value in the array.
+
+Example 1:
+
+Input: a[] = {2, 4, 6, 8, 10, 3, 1}
+Output: 10
+Example 2:
+
+Input: a[] = {3, 23, 10, 8, 7, 6}
+Output: 23
+Example 3:
+
+# Edge case (No decreasing part)
+Input: a[] = {10, 20, 30, 40, 50}
+Output: 50
+Example 4:
+
+# Edge case (No increasing part)
+Input: a[] = {100, 80, 60, 40, 20, 0}
+Output: 100
+
+Binary Search to find the Maximum Element in a Bitonic Array
+Given that the array is first sorted in increasing order and then in decreasing order, we can use binary search with some modifications to find the maximum element in O(log n) time complexity.
+
+
+If you analyze the examples carefully, you will notice that the maximum element is the only element that is greater than both of its adjacent elements.
+
+We can modify the standard Binary Search algorithm like this to obtain the maximum element:
+
+If the mid element is greater than both of its adjacent elements, then return a[mid] because it is the maximum.
+If the mid element is greater than its next element and smaller than its previous element, then the maximum lies on the left side of mid. (Ex: {3, 23, 10, 8, 7, 6})
+If the mid element is greater than its previous element and smaller than its next element, then the maximum lies on the right side of mid. (Ex: {2, 4, 6, 8, 10, 3, 1})
+import java.util.Scanner;
+
+class MaximumElementInBitonicArray {
+
+    private static int findMaxElement(int[] a) {
+        int n = a.length;
+        int start = 0;
+        int end = n - 1;
+
+        while (start <= end) {
+            int mid = (start + end) / 2;
+
+            if ((mid == 0 || a[mid] > a[mid - 1]) && (mid == n - 1 || a[mid] > a[mid + 1])) { 
+                return a[mid];   // a[mid] is greater than both its neighbours
+            } else if (a[mid] < a[mid - 1]) {                 
+                end = mid - 1;   // a[mid] is smaller than its previous element, maximum lies in left half
+            } else {                 
+                start = mid + 1; // maximum lies in the right half
+            }
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        int n = keyboard.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = keyboard.nextInt();
+        }
+        keyboard.close();
+
+        System.out.printf("MaxElement = %d%n", findMaxElement(a));
+    }
+}

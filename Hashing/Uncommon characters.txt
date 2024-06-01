@@ -1,0 +1,49 @@
+
+Given two strings A and B consisting of lowercase english characters. Find the characters that are not common in the two strings. 
+
+Note :- Return the string in sorted order.
+
+Example 1:
+
+Input:
+A = geeksforgeeks
+B = geeksquiz
+Output: fioqruz
+Explanation: 
+The characters 'f', 'i', 'o', 'q', 'r', 'u','z' 
+are either present in A or B, but not in both.
+
+
+
+class Solution
+{
+    String UncommonChars(String A, String B)
+    {
+        // code here
+        TreeSet<Character> ts1= new TreeSet<>();
+        TreeSet<Character> ts2= new TreeSet<>();
+        TreeSet<Character> ts3= new TreeSet<>();
+        for(int i=0 ; i<A.length() ; i++)
+        {
+            ts1.add(A.charAt(i));
+        }
+        ts3.addAll(ts1);
+        for(int i=0 ; i<B.length() ; i++)
+        {
+            ts2.add(B.charAt(i));
+        }
+        ts3.addAll(ts2);
+        
+        ts1.retainAll(ts2);
+        
+        ts3.removeAll(ts1);
+        if(ts3.size()==0)
+            return "-1";
+            String s="";
+        for(Character c:ts3)
+        {
+            s=s+c;
+        }
+               return s;
+    }
+}

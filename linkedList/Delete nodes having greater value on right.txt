@@ -1,0 +1,51 @@
+Given a singly linked list, remove all the nodes which have a greater value on their right side.
+
+Example 1:
+
+Input:
+LinkedList = 12->15->10->11->5->6->2->3
+Output: 15 11 6 3
+Explanation: Since, 12, 10, 5 and 2 are
+the elements which have greater elements
+on the following nodes. So, after deleting
+them, the linked list would like be 15,
+11, 6, 3.
+
+
+class Solution
+{
+    Node reverse(Node head){
+        Node prev=null;
+        Node cur=head;
+        while(cur!=null){
+            Node next=cur.next;
+            cur.next=prev;
+            prev=cur;
+            cur=next;
+        }
+        return prev;
+    }
+    Node compute(Node head)
+    {
+        // your code here
+        head=reverse(head);
+        Node cur=head;
+        int max=head.data;
+        Node prev=head;
+        head=head.next;
+        while(head!=null){
+            if(head.data>=max){
+                max=head.data;
+                prev=head;
+                head=head.next;
+            }
+            else{
+                prev.next=head.next;
+                head=head.next;
+            }
+        }
+        head=reverse(cur);
+        return head;
+    }
+}
+  

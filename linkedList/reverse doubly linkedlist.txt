@@ -1,0 +1,37 @@
+Given a doubly linked list of n elements. The task is to reverse the doubly linked list.
+
+Example 1:
+
+Input:
+LinkedList: 3 <--> 4 <--> 5
+Output: 5 4 3
+
+
+
+
+public static Node reverseDLL(Node  head)
+{
+    //Your code here
+    Node cur=head;
+    if(cur==null || cur.next==null){
+        return head;
+    }
+    while(cur.next!=null){
+        cur=cur.next;
+    }
+    head=cur;
+    cur.next=cur.prev;
+    cur.prev=null;
+    cur=cur.next;
+    
+    while(cur.prev!=null){
+        Node temp=cur.next;
+        cur.next=cur.prev;
+        cur.prev=temp;
+        cur=cur.next;
+    }
+    cur.prev=cur.next;
+    cur.next=null;
+    return head;
+    
+}

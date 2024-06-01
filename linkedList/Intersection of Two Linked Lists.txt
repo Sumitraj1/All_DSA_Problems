@@ -1,0 +1,63 @@
+Given two linked lists, the task is to complete the function findIntersection(), that returns the intersection of two linked lists. Each of the two linked list contains distinct node values.
+
+Example 1:
+
+Input:
+LinkedList1: 9->6->4->2->3->8
+LinkedList2: 1->2->8->6
+Output: 6 2 8
+
+
+
+
+//User function Template for Java
+
+/* structure of list Node:
+
+class Node 
+{
+    int data;
+    Node next;
+    
+    Node(int a)
+        {
+            data = a;
+            next = null;
+        }
+}
+
+*/
+
+class Solution
+{
+    public static Node findIntersection(Node head1, Node head2)
+    {
+        // add your code here
+        // return the head of intersection list
+        
+         HashMap<Integer,Integer> map = new HashMap<>();
+        Node temp = head1;
+        Node res = new Node(-1);
+        Node ans = res;
+        while(temp != null){
+            map.put(temp.data,1);
+            temp = temp.next;
+        }
+        Node t = head2;
+        while(t != null){
+            map.put(t.data,map.getOrDefault(t.data,0)+1);
+            t = t.next;
+        }
+        Node T = head1;
+        while(T != null){
+            if(map.get(T.data) == 2){
+                res.next = new Node(T.data);
+                res = res.next;
+            }
+            T = T.next;
+        }
+        return ans.next;
+        
+        
+    }
+}

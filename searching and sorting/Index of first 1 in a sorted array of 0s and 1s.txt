@@ -1,0 +1,73 @@
+
+Given a sorted array consisting 0s and 1s. The task is to find the index of first 1 in the given array.
+
+ 
+
+Example 1:
+
+Input : 
+arr[] = {0, 0, 0, 0, 0, 0, 1, 1, 1, 1}
+Output : 
+6
+Explanation:
+The index of first 1 in the array is 6.
+
+
+
+class Solution {
+    
+    public long firstIndex(long arr[], long n)
+    {
+        // Your code goes here
+    //     int l = 0, h = 1;
+      
+       
+    //     while (arr[h] == 0) {
+      
+    //         // lower bound
+    //         l = h;
+      
+    //         // upper bound
+    //         h = 2 * h;
+    //     }
+      
+    //     // required index of first '1'
+    //     return indexOfFirstOne(arr, l, h);
+    
+    // }
+    // public static int indexOfFirstOne(long arr[],
+    //                               int low, int high)
+    // {
+    //     int mid=0;
+    //     while (low <= high) {
+    //         mid = (low + high) / 2;
+      
+           
+    //         if (arr[mid] == 1 &&
+    //             (mid == 0 || arr[mid - 1] == 0))
+    //             break;
+      
+            
+    //         else if (arr[mid] == 1)
+    //             high = mid - 1;
+      
+    //         // first '1' lies to the right of 'mid'
+    //         else
+    //             low = mid + 1;
+    //     }
+      
+    //     // required index
+    //     return mid;
+    
+    
+    for(int i=0;i<n;i++){
+
+            if(arr[i]==1)
+
+            return i;
+
+        }
+
+        return -1;
+    }
+}

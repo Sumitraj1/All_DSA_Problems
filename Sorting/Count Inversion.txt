@@ -1,0 +1,88 @@
+
+Given an array of integers. Find the Inversion Count in the array. 
+
+Inversion Count: For an array, inversion count indicates how far (or close) the array is from being sorted. If array is already sorted then the inversion count is 0. If an array is sorted in the reverse order then the inversion count is the maximum. 
+Formally, two elements a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
+ 
+
+Example 1:
+
+Input: N = 5, arr[] = {2, 4, 1, 3, 5}
+Output: 3
+Explanation: The sequence 2, 4, 1, 3, 5 
+has three inversions (2, 1), (4, 1), (4, 3).
+
+
+
+
+
+
+class Solution
+{
+    // arr[]: Input Array
+    // N : Size of the Array arr[]
+    //Function to count inversions in the array.
+    
+    // long count = 0;
+    //     for(int i=0; i<N-1; i++)
+    //     {
+    //         for(int j=i+1; j<N; j++)
+    //         {
+    //             if(arr[i]>arr[j])
+    //                 count++;
+    //         }
+    //     }
+    //     return count;
+    
+    
+   static long inversionCount(long arr[], long N)
+    {
+        // Your Code Here
+        return mergeSortCount(arr,0,N-1);
+    }
+    
+    static long mergeSortCount(long[] arr, long l, long r){
+        long count=0;
+        if(l>=r){
+            return count;
+        }
+        if(l<r){
+            long mid = (l+r)/2;
+            count+=mergeSortCount(arr, l,mid);
+            count+=mergeSortCount(arr, mid+1,r);
+            count+=mergeCount(arr,l,mid,r);
+        }
+        return count;
+    }
+    
+    static long mergeCount(long[] arr, long l, long mid, long r){
+        long[] temp = new long[(int)(r-l+1)];
+        long i=l;
+        long j=mid+1;
+        long k=0;
+        long count =0;
+        
+        while(i<=mid && j<=r){
+            if(arr[(int)i]<=arr[(int)j]){
+                temp[(int)k++] = arr[(int)i++];
+            }
+            else{
+                temp[(int)k++]=arr[(int)j++];
+                count+=mid-i+1;
+            }
+        }
+        
+        while(i<=mid){
+            temp[(int)k++] = arr[(int)i++];
+        }
+        
+        while(j<=r){
+            temp[(int)k++] = arr[(int)j++];
+        }
+        
+        for(i=l, k=0;i<=r;i++,k++){
+            arr[(int)i]=temp[(int)k];
+        }
+        return count;
+    }
+}

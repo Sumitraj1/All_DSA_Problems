@@ -1,0 +1,122 @@
+Given an array of integers and another number. Find all the unique quadruple from the given array that sums up to the given number.
+
+Example 1:
+
+Input:
+N = 5, K = 3
+A[] = {0,0,2,1,1}
+Output: 0 0 1 2 
+Explanation: Sum of 0, 0, 1, 2 is equal
+to K.
+
+
+
+class Solution {
+    public ArrayList<ArrayList<Integer>> fourSum(int[] nums, int target) {
+       // code here
+    //     ArrayList<ArrayList<Integer>>al=new ArrayList<>();
+       
+        
+    //     if(arr.length<4){
+    //         ArrayList<Integer>list=new ArrayList<>();
+    //         list.add(-1);
+    //         al.add(list);
+    //         return al;
+    //     }
+        
+    //     Arrays.sort(arr);
+       
+    //   int l=0;
+    //   int r=arr.length-1;
+    //   int i=0;
+       
+    //   while(l<r){
+    //       long  sum=arr[l]+arr[l+1]+arr[r]+arr[r-1];
+    //       if(sum==k){
+    //             ArrayList<Integer> list = new ArrayList<>();
+    //             list.add(arr[l]);
+    //             list.add(arr[l+1]);
+    //             list.add(arr[r]);
+    //             list.add(arr[r-1]);
+    //          al.add(list);
+    //       }
+    //       else if(sum > k){
+    //           r--;
+    //       }
+    //       else{
+    //           l++;
+    //       }
+    //       i++;
+    //   }
+       
+    //   return al;
+    
+    
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        
+        if (nums.length < 4) {
+            // If the array has less than 4 elements, return a result with -1 as a placeholder
+            ArrayList<Integer> list = new ArrayList<>();
+            list.add(-1);
+            result.add(list);
+            return result;
+        }
+        
+        Arrays.sort(nums); // Sorting the array in ascending order
+        
+        for (int i = 0; i < nums.length - 3; i++) {
+            // Fix the first element and iterate through the rest of the array
+            
+            // Skip duplicates for the first element
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+            
+            for (int j = i + 1; j < nums.length - 2; j++) {
+                // Fix the second element and use a two-pointer approach for the remaining elements
+                
+                // Skip duplicates for the second element
+                if (j > i + 1 && nums[j] == nums[j - 1])
+                    continue;
+                
+                int left = j + 1;
+                int right = nums.length - 1;
+                
+                while (left < right) {
+                    int sum = nums[i] + nums[j] + nums[left] + nums[right];
+                    
+                    if (sum == target) {
+                        // Found a valid quadruplet, add it to the result
+                        ArrayList<Integer> list = new ArrayList<>();
+                        list.add(nums[i]);
+                        list.add(nums[j]);
+                        list.add(nums[left]);
+                        list.add(nums[right]);
+                        result.add(list);
+                        
+                        // Skip duplicates for the third and fourth elements
+                        while (left < right && nums[left] == nums[left + 1])
+                        {
+                            left++;
+                        }
+                            
+                        while (left < right && nums[right] == nums[right - 1]){
+                            right--;
+                        }
+                            
+                        
+                        // Move the pointers towards the center
+                        left++;
+                        right--;
+                    } 
+                    else if (sum < target) {
+                        left++;
+                    } else {
+                        right--;
+                    }
+                }
+            }
+        }
+        return result;
+    
+    }
+}

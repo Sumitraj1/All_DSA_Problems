@@ -1,0 +1,96 @@
+Given two arrays A and B of equal size N, the task is to find if given arrays are equal or not. Two arrays are said to be equal if both of them contain same set of elements, arrangements (or permutation) of elements may be different though.
+Note : If there are repetitions, then counts of repeated elements must also be same for two array to be equal.
+
+Example 1:
+
+Input:
+N = 5
+A[] = {1,2,5,4,0}
+B[] = {2,4,5,0,1}
+Output: 1
+Explanation: Both the array can be 
+rearranged to {0,1,2,4,5}
+
+
+
+
+class Solution{
+    //Function to check if two arrays are equal or not.
+    public static boolean check(long A[],long B[],int N)
+    {
+        //Your code here
+        //   Arrays.sort(A);
+        // Arrays.sort(B);
+        // boolean flag=false;
+        
+        // if(A.length!=B.length){
+        //     return false;
+        // }
+        // else{
+        //     for(int i=0;i<N;i++){
+        //         if(A[i]==B[i]){
+        //             flag=true;
+        //         }
+        //         else{
+        //             flag=false;
+        //             break;
+        //         }
+        //     }
+        // }
+        
+        // return flag;
+        
+        
+        
+    //   long M=B.length;
+    //      if (N != M)
+    //         return false;
+ 
+    //     // Creating 2 priority queues for 2 arrays
+    //     PriorityQueue<Long> pq1
+    //         = new PriorityQueue<Long>(
+    //             Collections.reverseOrder());
+    //     PriorityQueue<Long> pq2
+    //         = new PriorityQueue<Long>(
+    //             Collections.reverseOrder());
+ 
+    //     // Insert elements of both the arrays into their
+    //     // respective priority queues
+    //     for (int i = 0; i < N; i++) {
+    //         pq1.offer(A[i]);
+    //         pq2.offer(B[i]);
+    //     }
+ 
+    //     // Traverse and check if the top elements of both
+    //     // the priority queues are same or not
+    //     while (N-- > 0) {
+    //         // If top elements are not same then return
+    //         // false
+    //         if (!pq1.peek().equals(pq2.peek()))
+    //             return false;
+ 
+    //         // If top elements are same then
+    //         // Popping top elements of both the priority
+    //         // queues
+    //         pq1.poll();
+    //         pq2.poll();
+    //     }
+    //     // If all elements were same.
+    //     return true;
+    
+    
+    // Map<Integer, Integer> aCount = new HashMap<>();
+    //     Map<Integer, Integer> bCount = new HashMap<>();
+    //     for (int i = 0; i < A.length; i++) {
+    //         int count = aCount.getOrDefault(A[i], 0);
+    //         aCount.put(A[i], count + 1);
+    //     }
+ 
+    //     for (int i = 0; i < B.length; i++) {
+    //         int count = bCount.getOrDefault(B[i], 0);
+    //         bCount.put(B[i], count + 1);
+    //     }
+ 
+    //     return aCount.equals(bCount);
+    // }
+}

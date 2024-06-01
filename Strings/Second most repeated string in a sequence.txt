@@ -1,0 +1,75 @@
+
+Given a sequence of strings, the task is to find out the second most repeated (or frequent) string in the given sequence.
+
+Note: No two strings are the second most repeated, there will be always a single string.
+
+Example 1:
+
+Input:
+N = 6
+arr[] = {aaa, bbb, ccc, bbb, aaa, aaa}
+Output: bbb
+Explanation: "bbb" is the second most 
+occurring string with frequency 2.
+
+Example 2:
+
+Input: 
+N = 6
+arr[] = {geek, for, geek, for, geek, aaa}
+Output: for
+Explanation: "for" is the second most
+occurring string with frequency 2.
+
+class Solution
+{
+    String secFrequent(String arr[], int N)
+    {
+        // your code here.1.1.
+        //  Map<String, Integer> map = new HashMap<>();
+        
+        // for(int i = 0; i < N; i++) {
+        //     map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+        // }
+        
+        // List<Integer> list = new ArrayList<>();
+        // list.addAll(map.values());
+        // Collections.sort(list);
+        
+        // for(Map.Entry<String, Integer> e : map.entrySet()) {
+        //     if(e.getValue() == list.get(list.size() - 2)) {
+        //         return e.getKey();
+        //     }
+        // }
+        
+        // return "";
+        
+         HashMap<String,Integer>map=new HashMap<>();
+        
+        for(String s: arr){
+            map.put(s,map.getOrDefault(s,0)+1);
+        }
+        
+        int maxcnt=Integer.MIN_VALUE;
+        int seccnt=Integer.MIN_VALUE;
+        
+        String maxstr="";
+        String secstr="";
+        
+       for(String s: map.keySet()){
+           int cnt=map.get(s);
+           
+           if(cnt>maxcnt){
+               seccnt=maxcnt;
+               secstr=maxstr;
+               maxcnt=cnt;
+               maxstr=s;
+           }else if(cnt > seccnt && cnt!=maxcnt){
+               seccnt=cnt;
+               secstr=s;
+           }
+       }
+        
+        return secstr;
+    }
+}

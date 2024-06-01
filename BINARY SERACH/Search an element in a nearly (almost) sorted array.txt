@@ -1,0 +1,54 @@
+
+Given that the array is sorted but an element can be moved to its adjacent positions, we can apply binary search with some tweaks to search for the target value in O(log n) time complexity:
+
+First, compare the target value with all the 3 elements in the middle (since the middle element can be swapped with its adjacent elements). If the target is equal to any of the middle 3 elements, then we return the corresponding index.
+Otherwise, if target < a[mid], then we can discard the upper half of the array and continue the search in the lower half by setting end=mid-2. This is because all the elements after mid+2 (upper half of the array) will be greater than a[mid] so no point searching for target in the upper half.
+If target > a[mid], then continue the search in the upper half of the array by setting start=mid+2. (All the elements before mid-2 will be smaller than a[mid] so we can discard the lower half of the array)
+Let’s look at the implementation:
+
+import java.util.Scanner;
+
+class SearchInNearlySortedArray {
+    private static int binarySearchNearlySorted(int[] a, int target) {
+        int n = a.length;
+        int start = 0;
+        int end = n-1;
+
+        while(start <= end) {
+            int mid = (start + end)/2;
+
+            if(target == a[mid]) {
+                return mid;
+            }
+            
+            if(mid > 0 && target == a[mid-1]) {
+                return mid-1;
+            }
+
+            if(mid < n-1 && target == a[mid+1]) {
+                return mid+1;
+            }
+            
+            if (target < a[mid]) {
+                end = mid-2;
+            } else {
+                start = mid+2;
+            }
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        int n = keyboard.nextInt();
+        int[] a = new int[n];
+        for(int i = 0; i < n; i++) {
+          a[i] = keyboard.nextInt(); 
+        }
+        int target = keyboard.nextInt();
+        keyboard.close();
+
+        System.out.printf("BinarySearchNearlySorted(%d) = %d%n", target, binarySearchNearlySorted(a, target));
+    }
+}

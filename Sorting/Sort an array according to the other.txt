@@ -1,0 +1,117 @@
+Given two integer arrays A1[ ] and A2[ ] of size N and M respectively. Sort the first array A1[ ] such that all the relative positions of the elements in the first array are the same as the elements in the second array A2[ ].
+See example for better understanding.
+Note: If elements are repeated in the second array, consider their first occurance only.
+
+Example 1:
+
+Input:
+N = 11 
+M = 4
+A1[] = {2, 1, 2, 5, 7, 1, 9, 3, 6, 8, 8}
+A2[] = {2, 1, 8, 3}
+Output: 
+2 2 1 1 8 8 3 5 6 7 9
+Explanation: Array elements of A1[] are
+sorted according to A2[]. So 2 comes first
+then 1 comes, then comes 8, then finally 3
+comes, now we append remaining elements in
+sorted order.
+
+class Solution{
+    // A1[] : the input array-1
+    // N : size of the array A1[]
+    // A2[] : the input array-2
+    // M : size of the array A2[]
+    
+    //Function to sort an array according to the other array.
+    public static int[] sortA1ByA2(int a1[], int n, int a2[], int m)
+    {
+        // //Your code here
+          int ans[] = new int[n];
+        HashMap<Integer, Integer> hm = new HashMap<>();
+
+        // Count the occurrences of elements in array a1
+        for (int i = 0; i < n; i++) {
+            hm.put(a1[i], hm.getOrDefault(a1[i], 0) + 1);
+        }
+
+        int x = 0; // Initialize the index for the 'ans' array
+
+        // Iterate through array a2 and populate the 'ans' array
+        int cnt=0;
+        for (int i = 0; i < m; i++) {
+            if (hm.containsKey(a2[i])) {
+                int find = hm.get(a2[i]);
+
+                while (find > 0) {
+                    ans[x] = a2[i];
+                    x++;
+                    find--;
+                }
+
+                hm.remove(a2[i]); // Remove the element from the HashMap after placing it in the 'ans' array
+            }
+        
+        else if(!hm.containsKey(a2[i])){
+              cnt++;
+            
+        }
+        }
+        
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int i=0;i<n;i++){
+              if(hm.containsKey(a1[i])){
+                  int find=hm.get(a1[i]);
+                  while(find>0){
+                    //   ans[x]=a1[i];
+                      list.add(a1[i]);
+                    //   x++;
+                      find--;
+                  }
+              }
+              hm.remove(a1[i]);
+               
+        }
+        Collections.sort(list);
+        int sz=list.size();
+        int y=0;
+        while(sz>0){
+            ans[x]=list.get(y);
+            x++;y++;
+            sz--;
+        }
+        if(cnt==a2.length){
+        Arrays.sort(a1);
+        return a1;
+        }
+        return ans;
+        
+        // int[] arr = new int[10000001];
+
+        // for(int num : a1)
+        //     arr[num]++;
+
+        // int[] res = new int[a1.length];
+
+        // int i = 0;
+
+        // for(int num : a2){
+        //     while(arr[num] > 0){
+        //         res[i] = num;
+        //         arr[num]--;
+        //         i++;
+        //     }
+        // }
+
+        // for(int j = 0; j < arr.length; j++){
+        //     while(arr[j] > 0){
+        //         res[i] = j;
+        //         arr[j]--;
+        //         i++;
+        //     }
+        // }
+
+        // return res;
+    }
+    
+}

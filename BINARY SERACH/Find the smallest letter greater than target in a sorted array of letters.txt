@@ -1,0 +1,69 @@
+Given an array of lowercase letters sorted in ascending order, and a target letter, find the smallest letter in the array that is greater than the target.
+
+Note that, Letters also wrap around. For example, if target = 'z' and letters = ['a', 'b'], the answer is 'a'.
+
+Example 1:
+
+Input: letters = ["d", "h", "l"], target = "a"
+Output: "d"
+Example 2:
+
+Input: letters = ["d", "h", "l"], target = "d"
+Output: "h"
+Example 3:
+
+Input: letters = ["d", "h", "l"], target = "f"
+Output: "h"
+Example 4:
+
+Input: letters = ["d", "h", "l"], target = "j"
+Output: "l"
+Example 4:
+
+Input: letters = ["d", "h", "l"], target = "n"
+Output: "d"
+
+Binary search to find the smallest letter greater than target
+This problem is a variation of the problem Find the ceiling of an element in a sorted array. The implementation approach is also similar. We apply binary search to find the smallest letter greater than the target. Here is the full implementation:
+
+import java.util.Scanner;
+
+class NextLetter {
+    private static int findNextLetter(char[] letters, char target) {
+        int n = letters.length;
+        int start = 0, end = n - 1;
+
+        char nextLetter = letters[start];
+
+        while (start <= end) {
+            int mid = (start + end) / 2;
+
+            if (target < letters[mid]) {
+                /*
+                 * letters[mid] is the smallest letter found so far that is greater than target.
+                 * So update nextLetter to this value and keep checking in the left side of the
+                 * array to find an even smaller letter that is greater than target
+                 */
+                nextLetter = letters[mid];
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        return nextLetter;
+    }
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        int n = keyboard.nextInt();
+        char[] letters = new char[n];
+        for (int i = 0; i < n; i++) {
+            letters[i] = keyboard.next().charAt(0);
+        }
+        char target = keyboard.next().charAt(0);
+        keyboard.close();
+
+        System.out.printf("NextLetter(%c) = %c%n", target, findNextLetter(letters, target));
+    }
+}

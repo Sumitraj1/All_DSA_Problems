@@ -1,0 +1,79 @@
+Given three arrays sorted in increasing order. Find the elements that are common in all three arrays.
+Note: can you take care of the duplicates without using any additional Data Structure?
+
+Example 1:
+
+Input:
+n1 = 6; A = {1, 5, 10, 20, 40, 80}
+n2 = 5; B = {6, 7, 20, 80, 100}
+n3 = 8; C = {3, 4, 15, 20, 30, 70, 80, 120}
+Output: 20 80
+Explanation: 20 and 80 are the only
+common elements in A, B and C.
+
+
+
+class Solution
+{
+    ArrayList<Integer> commonElements(int A[], int B[], int C[], int n1, int n2, int n3) 
+    {
+        // code here 
+        // ArrayList<Integer> ans=new ArrayList<>();
+        // int i=0;
+        // int j=0;
+        // int k=0;
+        // int check=0;
+        // while(i<n1 && j<n2 && k<n3){
+        //     if(A[i]==B[j] && B[j]==C[k]){
+        //         if(check!=A[i]){
+        //         ans.add(A[i]);
+        //         }
+        //         check=A[i];
+        //         i++;
+        //         j++;
+        //         k++;
+        //     }
+        //     else if(A[i] <= B[j] && A[i] <= C[k]){
+        //         i++;
+        //     }
+        //     else if(B[j] <= A[i] && B[j] <= C[k]){
+        //         j++;
+        //     }
+        //     else{
+        //         k++;
+        //     }
+        // }
+        // return ans;
+        
+         ArrayList<Integer> list=new  ArrayList<>();
+         HashMap<Integer,Integer> map1=new  HashMap<>();
+         HashMap<Integer,Integer> map2=new  HashMap<>();
+         HashMap<Integer,Integer> map3=new  HashMap<>();
+         
+         for(int p:A){
+             if(map1.containsKey(p))
+             map1.put(p,map1.get(p)+1);
+             else
+             map1.put(p,0);
+         }
+         for(int p:B){
+             if(map2.containsKey(p))
+             map2.put(p,map2.get(p)+1);
+             else
+             map2.put(p,0);
+         }
+          for(int p:C){
+             if(map3.containsKey(p))
+             map3.put(p,map3.get(p)+1);
+             else
+             map3.put(p,0);
+         }
+        for (Map.Entry<Integer, Integer> entry : map1.entrySet()) {
+                if (map2.containsKey(entry.getKey())  && map3.containsKey(entry.getKey())) 
+                list.add(entry.getKey());
+            
+        }
+        Collections.sort(list);
+        return list;
+    }
+}

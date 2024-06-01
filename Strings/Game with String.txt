@@ -1,0 +1,44 @@
+Given a string s of lowercase alphabets and a number k, the task is to print the minimum value of the string after removal of k characters. The value of a string is defined as the sum of squares of the count of each distinct character.
+ 
+
+Example 1:
+
+Input: s = abccc, k = 1
+Output: 6
+Explaination:
+We remove c to get the value as 12 + 12 + 22
+ 
+
+Example 2:
+
+Input: s = aabcbcbcabcc, k = 3
+Output: 27
+Explaination: We remove two 'c' and one 'b'. 
+Now we get the value as 32 + 32 + 32.
+
+
+class Solution{
+    static int minValue(String s, int k){
+        // code here
+         Queue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        HashMap<Character,Integer> map=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+        }
+        for(int a:map.values()){
+            pq.add(a);
+        }
+        while(k>0){
+            int a=pq.poll();
+            a--;
+            pq.add(a);
+            k--;
+        }
+        int sum=0;
+        while(!pq.isEmpty()){
+            sum+=pq.peek()*pq.peek();
+            pq.poll();
+        }
+        return sum;
+    }
+}

@@ -1,0 +1,62 @@
+
+Given a string you need to print the size of the longest possible substring that has exactly K unique characters. If there is no possible substring then print -1.
+
+
+Example 1:
+
+Input:
+S = "aabacbebebe", K = 3
+Output: 7
+Explanation: "cbebebe" is the longest 
+substring with K distinct characters.
+
+
+class Solution {
+    public int longestkSubstr(String s, int k) {
+        // code here
+        
+         int i = 0; int j = 0;
+        int N = s.length();
+        
+        int ans = -1;
+        
+        HashMap<Character,Integer>mp=new HashMap<>();
+        
+        while(j<N)
+        {
+             char ch=s.charAt(j);
+            if(mp.containsKey(ch)){
+                mp.put(ch,mp.get(ch)+1);
+            }
+            else{
+                mp.put(ch,1);
+            }
+            if(mp.size()<k)
+            {
+                j++;
+            }
+            else if(mp.size() == k)
+            {
+                ans = Math.max(ans, j-i+1);
+                j++;
+            }
+            else if(mp.size()>k){
+                while(mp.size()>k)
+                {
+                     char ch1=s.charAt(i);
+                    mp.put(ch1,mp.get(ch1)-1);
+                    if(mp.get(ch1)==0){
+                        mp.remove(ch1);
+                    }
+                   i++;
+                    
+                }
+            
+            
+                
+                j++;
+            }
+        }
+        return ans;
+    }
+}

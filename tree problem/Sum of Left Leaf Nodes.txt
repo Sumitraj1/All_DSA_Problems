@@ -1,0 +1,30 @@
+class Solution{
+
+    int sum = 0;
+
+    public int leftLeavesSum(Node root) {     
+
+      find(root);
+
+      return sum;  
+
+    } 
+
+    void find(Node root){   
+
+        if(root == null) return;
+
+        if(root.left != null)
+        if(root.left.left == null && root.left.right == null) 
+        sum +=root.left.data;
+
+        find(root.left);
+
+        find(root.right);
+        // Write your code here
+        
+        
+        
+    } 
+
+}

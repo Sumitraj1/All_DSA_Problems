@@ -1,0 +1,71 @@
+Write an efficient algorithm that searches for a value in an m x n matrix. The matrix has the following properties:
+
+Integers in each row are sorted from left to right.
+The first integer of each row is greater than the last integer of the previous row.
+Example 1:
+
+Input:
+matrix = [
+  [1,  5,  9,  11],
+  [13, 16, 19, 24],
+  [28, 30, 38, 50]
+]
+target = 5
+Output: true
+Example 2:
+
+Input:
+matrix = [
+  [1,  5,  9,  11],
+  [13, 16, 19, 24],
+  [28, 30, 38, 50]
+]
+target = 12
+Output: false
+
+Sorted Matrix search solution in Java
+The naive approach of searching for an element in a 2D matrix is to just iterate over every element of the matrix and check if a matching element is found or not. This approach will have a time complexity of O(m*n).
+
+But, since the matrix is sorted, we can use binary search and find the element in O(log(m*n)) time. The following solution uses binary search:
+
+
+import java.util.Scanner;
+
+class Sorted2DMatrixSearch {
+    private static boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix.length == 0) {
+            return false;
+        }
+        
+        int numRows = matrix.length;
+        int numCols = matrix[0].length;
+        
+        int start = 0, end = numRows*numCols - 1;
+        
+        while(start <= end) {
+            int mid = (start+end)/2;
+            int midValue = matrix[mid/numCols][mid%numCols];
+            if(target == midValue) {
+                return true;
+            } else if (target < midValue) {
+                end = mid-1;
+            } else {
+                start = mid+1;
+            }
+        }
+        
+        return false;
+    }
+    
+    public static void main(String[] args) {
+        int[][]matrix = {
+            {1, 5, 9, 11},
+            {13, 16, 19, 24},
+            {28, 30, 38, 50}
+        };
+        
+        int target = 38;
+        
+        System.out.println(searchMatrix(matrix, target));
+    }
+}

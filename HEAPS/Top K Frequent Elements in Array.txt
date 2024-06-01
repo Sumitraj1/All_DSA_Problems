@@ -1,0 +1,57 @@
+Given a non-empty array of integers, find the top k elements which have the highest frequency in the array. If two numbers have the same frequency then the larger number should be given preference. 
+
+Note: Print the elements according to the frequency count (from highest to lowest) and if the frequency is equal then larger number will be given preference.
+
+Example 1:
+
+Input:
+N = 6
+nums = {1,1,1,2,2,3}
+k = 2
+Output: {1, 2}
+
+
+
+class pair{
+    int first;
+    int second;
+    pair(int first,int second){
+        this.first=first;
+        this.second=second;
+    }
+}
+
+
+class Solution {
+    public int[] topK(int[] nums, int k) {
+       // Code here
+        HashMap<Integer,Integer> h=new HashMap<>();
+        for(int x:nums){
+            h.put(x,h.getOrDefault(x,0)+1);
+        }
+        
+        PriorityQueue<pair> pq=new PriorityQueue<>((a,b)->{
+            int f=b.first-a.first;
+            if(f==0){
+                return b.second-a.second;
+            }
+            return f;
+        });
+        
+        for(Map.Entry<Integer,Integer>m:h.entrySet()){
+            pq.add(new pair(m.getValue(),m.getKey()));
+        }
+        int i=0;
+        int[] ans=new int[k];
+        while(k-->0&&!pq.isEmpty()){
+            pair p=pq.remove();
+            ans[i++]=p.second;
+        }
+        return ans;
+        
+       
+        
+        
+        
+    }
+}

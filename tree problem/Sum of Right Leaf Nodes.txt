@@ -1,0 +1,27 @@
+class Solution
+{
+      int sum = 0;
+
+ int rightLeafSum(Node root){
+
+  store(root);
+
+        return sum;
+
+    }
+
+    void store(Node root){
+
+        if(root == null) return;
+
+        if(root.right != null) 
+        if(root.right.right == null && root.right.left == null) 
+        sum+=root.right.data;
+
+        store(root.right);
+
+        store(root.left);
+        // code here
+        
+    }
+}

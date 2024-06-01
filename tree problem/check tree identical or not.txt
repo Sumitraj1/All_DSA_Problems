@@ -1,0 +1,24 @@
+class Solution
+{
+    //Function to check if two trees are identical.
+    
+    boolean solve(Node root1, Node root2){
+        if(root1==null || root2==null){
+            return root1==root2;
+        }
+        boolean a= root1.data==root2.data;
+        boolean b= solve(root1.left,root2.left); 
+        boolean c=solve(root1.right,root2.right);
+        boolean ans=a && b && c;
+        return ans;
+    }
+    
+	boolean isIdentical(Node root1, Node root2)
+	{
+	    // Code Here
+	    
+	    return solve(root1,root2);
+	    
+	}
+	
+}

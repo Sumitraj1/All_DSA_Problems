@@ -1,0 +1,27 @@
+
+
+class Solution{
+    static int subsetXOR(int arr[], int N, int K) {
+        // code here
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        int cnt=0;
+        int xor=0;
+        for(int i=0;i<N;i++){
+            xor=xor^arr[i];
+            if(hm.get(xor^K)!=null){
+               cnt+=hm.get(xor^K); 
+            }
+            if(xor==K){
+                cnt++;
+            }
+            if(hm.get(xor)!=null){
+                hm.put(xor,hm.get(xor)+1);
+                
+            }
+            else{
+                hm.put(xor,1);
+            }
+        }
+        return cnt;
+    }
+}

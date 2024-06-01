@@ -1,0 +1,18 @@
+class Solution {
+    /*you are required to complete this function */
+    boolean hasPathSum(Node root, int S) {
+        // Your code here
+        if(root==null)
+        {
+            return false;
+        }
+        S-=root.data;
+        if(root.left==null && root.right==null && S==0){
+            return true;
+        }
+        boolean left=hasPathSum(root.left,S);
+        boolean right=hasPathSum(root.right,S);
+        S+=root.data;
+        return left||right;
+    }
+}

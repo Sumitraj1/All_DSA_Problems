@@ -1,0 +1,50 @@
+
+Given two linked lists sorted in increasing order, create a new linked list representing the intersection of the two linked lists. The new linked list should be made with its own memory the original lists should not be changed.
+Note: The linked list elements are not necessarily distinct.
+
+Example 1:
+
+Input:
+L1 = 1->2->3->4->6
+L2 = 2->4->6->8
+Output: 2 4 6
+Explanation: For the given first two
+linked list, 2, 4 and 6 are the elements
+in the intersection.
+
+class Sol
+{
+   public static Node findIntersection(Node head1, Node head2)
+    {
+        // code here.
+        Node ptr1=head1;
+        Node ptr2=head2;
+        Node head=null;
+        Node cur=null;
+        while(ptr1!=null && ptr2!=null){
+            if(ptr1.data==ptr2.data){
+                if(head==null){
+                    Node t=new Node(ptr1.data);
+                    head=t;
+                    cur=t;
+                }
+                else{
+                    Node t=new Node(ptr1.data);
+                    cur.next=t;
+                    cur=cur.next;
+                }
+                ptr1=ptr1.next;
+                ptr2=ptr2.next;
+            }
+            else{
+                if(ptr1.data<ptr2.data){
+                    ptr1=ptr1.next;
+                }
+                else{
+                    ptr2=ptr2.next;
+                }
+            }
+        }
+        return head;
+    }
+}

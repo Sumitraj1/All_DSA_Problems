@@ -1,0 +1,86 @@
+
+Example 1:
+
+Input: a = [1, 4, 4, 10, 10, 15, 20], target = 10
+Output: [3, 4]
+Example 2:
+
+Input: a = [1, 4, 4, 10, 10, 15, 20], target = 15
+Output: [5, 5]
+Example 3:
+
+Input: a = [1, 4, 4, 10, 10, 15, 20], target = 0
+Output: [-1, -1]
+
+Binary Search to find the First and Last Position of an Element in a Sorted Array
+Since the array is sorted, we can apply binary search to find the first and last position. We will use standard binary search implementation and make some modifications to it to find the first/last position of the element. Here is the solution approach for finding the first position of the element:
+
+Initialize firstPosition to -1
+if target = a[mid], we have found the target value so we update firstPosition to mid. But since we need to find the very first position of target, we need to check further in the left part of the array to see if the target is available at a lower position or not.
+Rest of the approach is similar to binary search:
+If target < a[mid], continue the search in the left side of the mid element.
+Otherwise, continue the search in the right side of the mid element.
+import java.util.Scanner;
+
+class FirstLastPositionOfElement {
+    private static int binarySearchFirstPosition(int[] a, int target) {
+        int start = 0;
+        int end = a.length-1;
+
+        int firstPosition = -1;
+        
+        while(start <= end) {
+            int mid = (start + end)/2;
+
+            if(target == a[mid]) {
+                // Found target, update firstPosition and move to the left to find a smaller position by setting end=mid-1
+                firstPosition = mid;
+                end = mid-1;
+            } else if (target < a[mid]) {
+                end = mid-1;
+            } else {
+                start = mid+1;
+            }
+        }
+
+        return firstPosition;
+    }
+
+    private static int binarySearchLastPosition(int[] a, int target) {
+        int start = 0;
+        int end = a.length-1;
+
+        int lastPosition = -1;
+        while(start <= end) {
+            int mid = (start + end)/2;
+
+            if(target == a[mid]) {
+                // Found target, update lastPosition and move to the right to find a higher position by setting start=mid+1
+                lastPosition = mid;
+                start = mid+1;
+            } else if (target < a[mid]) {
+                end = mid-1;
+            } else {
+                start = mid+1;
+            }
+        }
+
+        return lastPosition;
+    }
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        int n = keyboard.nextInt();
+        int[] a = new int[n];
+        for(int i = 0; i < n; i++) {
+          a[i] = keyboard.nextInt(); 
+        }
+        int target = keyboard.nextInt();
+        keyboard.close();
+
+        int firstPosition = binarySearchFirstPosition(a, target);
+        int lastPosition = binarySearchLastPosition(a, target);
+
+        System.out.printf("First position = %d, Last position = %d%n", firstPosition, lastPosition);
+    }
+}

@@ -1,0 +1,81 @@
+Given a string 's'. The task is to find the smallest window length that contains all the characters of the given string at least one time.
+For eg. A = aabcbcdbca, then the result would be 4 as of the smallest window will be dbca.
+
+ 
+
+Example 1:
+
+Input : "AABBBCBBAC"
+Output : 3
+Explanation : Sub-string -> "BAC"
+Example 2:
+Input : "aaab"
+Output : 2
+Explanation : Sub-string -> "ab"
+ 
+Example 3:
+Input : "GEEKSGEEKSFOR"
+Output : 8
+Explanation : Sub-string -> "GEEKSFOR"
+
+
+//User function Template for Java
+
+class Solution {
+    public int findSubString( String str) {
+        // Your code goes here
+        // Set<Character> s=new HashSet<>();
+        // for(int i=0;i<str.length();i++){
+        //     s.add(str.charAt(i));
+        // }
+        
+        // HashMap<Character,Integer> m=new HashMap<>();
+        // int i=0;
+        // int j=0;
+        // int ans=str.length();
+        // int n=s.size();
+        // while(i<str.length()){
+        //     char p=str.charAt(i);
+        //     m.put(p,m.getOrDefault(p,0)+1);
+        //     if(m.size()==n){
+        //         while(i>j && (m.get(str.charAt(j))!=1)){
+        //             m.put(str.charAt(j),m.get(str.charAt(j)-1));
+        //             j++;
+        //         }
+        //         ans=Math.min(ans,i-j+1);
+        //     }
+        //     i++;
+        // }
+        // return ans;
+        
+        
+        Set<Character>set=new HashSet<>();
+        for(int i=0;i<str.length();i++){
+            set.add(str.charAt(i));
+        }
+        int left=0;
+        Map<Character,Integer> map=new HashMap<>();
+        int right=0;
+        int len=Integer.MAX_VALUE;
+        while(right<str.length()){
+            char c=str.charAt(right);
+            map.put(c,map.getOrDefault(c,0)+1);
+            if(map.size()!=set.size()){
+                right++;   
+            }
+            else{
+                
+                while(left<right && (map.get(str.charAt(left))!=1)){
+                    map.put(str.charAt(left),map.get(str.charAt(left))-1);
+                    left++;
+                }
+                  len=Math.min(len,right-left+1);
+                  right++;
+            }
+
+        }
+     
+         return len;
+        
+    }
+}

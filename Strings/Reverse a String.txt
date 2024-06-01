@@ -1,0 +1,29 @@
+You are given a string s. You need to reverse the string.
+
+Example 1:
+
+Input:
+s = Geeks
+Output: skeeG
+Example 2:
+
+Input:
+s = for
+Output: rof
+
+
+class Reverse
+{
+    // Complete the function
+    // str: input string
+    public static String reverseWord(String str)
+    {
+        // Reverse the string str
+        String s="";
+        for(int i=str.length()-1;i>=0;i--){
+            char c=str.charAt(i);
+            s=s+c;
+        }
+        return s;
+    }
+}

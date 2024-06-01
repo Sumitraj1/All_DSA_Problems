@@ -1,0 +1,137 @@
+Given an unsorted array Arr of N positive and negative numbers. Your task is to create an array of alternate positive and negative numbers without changing the relative order of positive and negative numbers.
+Note: Array should start with a positive number and 0 (zero) should be considered a positive element.
+ 
+
+Example 1:
+
+Input: 
+N = 9
+Arr[] = {9, 4, -2, -1, 5, 0, -5, -3, 2}
+Output:
+9 -2 4 -1 5 -5 0 -3 2
+Explanation : Positive elements : 9,4,5,0,2
+Negative elements : -2,-1,-5,-3
+As we need to maintain the relative order of
+postive elements and negative elements we will pick
+each element from the positive and negative and will
+store them. If any of the positive and negative numbers
+are completed. we will continue with the remaining signed
+elements.The output is 9,-2,4,-1,5,-5,0,-3,2
+
+
+ class Solution {
+    void rearrange(int arr[], int n) {
+        // code here
+        //  ArrayList<Integer> pos = new ArrayList<>();
+        // ArrayList<Integer> neg = new ArrayList<>();
+        // for(int i = 0; i<n; i++){
+        //     if(arr[i]>=0){
+        //         pos.add(arr[i]);
+        //     } 
+        //     else{
+        //       neg.add(arr[i]); 
+        //     } 
+        // }
+        // int i = 0, pv = 0, nv = 0;
+        // int ps = pos.size(), ns = neg.size();
+        // while(pv<ps && nv<ns){
+        //     arr[i++] = pos.get(pv++);
+        //     arr[i++] = neg.get(nv++);
+        // }
+        // while(pv<ps){
+        // arr[i++] = pos.get(pv++);
+        // }
+        // while(nv<ns){
+        // arr[i++] = neg.get(nv++);
+        // }
+        
+    //     int start=0;
+    //     int end=n-1;
+    //     int[] nums = new int[n];
+    //     for(int i=0; i<n; i++){
+    //         if(arr[i]>=0) nums[start++]=arr[i];
+    //         else if(arr[i]<0) nums[end--]=arr[i];
+                
+    //     }
+    //     int s=0;
+    //     int e=n-1;
+    //     for(int i=0;i<n;){
+	   //     if(s<start){
+	   //         arr[i]=nums[s++];
+	   //         i++;
+	   //     }
+	   //     if(e>end){
+	   //         arr[i]=nums[e--];
+	   //         i++;
+	   //     }
+	   // }
+	   
+	   //ArrayList<Integer> pos = new ArrayList<>();
+    //     ArrayList<Integer> neg = new ArrayList<>();
+        
+    //     for(int i = 0; i < n; i++) {
+    //         if(arr[i] < 0) {
+    //             neg.add(arr[i]);
+    //         }
+    //         else {
+    //             pos.add(arr[i]);
+    //         }
+    //     }
+        
+    //     int i = 0, j = 0, k = 0;
+    //     while(i < pos.size() && j < neg.size()) {
+    //         arr[k++] = pos.get(i);
+    //         arr[k++] = neg.get(j);
+    //         i++;
+    //         j++;
+    //     }
+        
+    //     while(i < pos.size()) {
+    //         arr[k++] = pos.get(i);
+    //         i++;
+    //     }
+        
+    //     while(j < neg.size()) {
+    //         arr[k++] = neg.get(j);
+    //         j++;
+    //     }
+    
+     Queue<Integer>positive=new LinkedList<>();
+        Queue<Integer>negative=new LinkedList<>();
+        for(int i=0;i<n;i++)
+        {
+        if(arr[i]>=0)
+            {
+               positive.add(arr[i]); 
+            }
+            else
+            {
+                negative.add(arr[i]);
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(i%2==0)
+            {
+                if(!positive.isEmpty())
+                {
+                    arr[i]=positive.remove();
+                }
+                else{
+                    arr[i]=negative.remove();
+                }
+            }
+            else
+            {
+                if(negative.isEmpty())
+                {
+                    arr[i]=positive.remove();
+                }
+                else{
+                     arr[i]=negative.remove();
+                }
+            }
+            
+        }
+    }
+}

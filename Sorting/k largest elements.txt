@@ -1,0 +1,35 @@
+Given an array Arr of N positive integers and an integer K, find K largest elements from the array.  The output elements should be printed in decreasing order.
+
+Example 1:
+
+Input:
+N = 5, K = 2
+Arr[] = {12, 5, 787, 1, 23}
+Output: 787 23
+Explanation: 1st largest element in the
+array is 787 and second largest is 23.
+
+
+class Solution {
+    int[] kLargest(int[] arr, int n, int k) {
+        // code here
+        // Arrays.sort(arr);
+        // int []res=new int[k];
+        // for(int i=0;i<k;i++)
+        // {
+        //     res[i]=arr[n-1-i];
+        // }
+        // return res;
+        
+        
+         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int ans[] = new int[k];
+        for(int i:arr)
+        pq.offer(i);
+        
+        for(int i = 0;i<k;i++)
+        ans[i]=pq.poll();
+        
+        return ans;
+    }
+}

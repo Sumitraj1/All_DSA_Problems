@@ -1,0 +1,50 @@
+
+Given a linked list sorted in ascending order and an integer called data, insert data in the linked list such that the list remains sorted.
+
+Example 1:
+
+Input:
+LinkedList: 25->36->47->58->69->80
+data: 19
+Output: 
+19 25 36 47 58 69 80
+Explanation:
+After inserting 19 the sorted linked list will look like the one in the output.
+Example 2:
+
+Input:
+LinkedList: 50->100
+data: 75
+Output: 
+50 75 100
+Explanation:
+After inserting 75 the sorted linked list will look like the one in the output.
+
+/*class Node
+    {
+        int data;
+        Node next;
+        Node(int d) {data = d; next = null; }
+    }*/
+
+// sortedInsert method should return the head of the modified linked list.
+class Solution {
+    Node sortedInsert(Node head, int key) {
+        // Add your code here.
+        Node newNode = new Node(key);
+        if (head == null || key < head.data) {
+            newNode.next = head;
+            return newNode;
+        }
+    
+        Node current = head;
+        while (current.next != null && current.next.data < key) {
+            current = current.next;
+        }
+    
+        newNode.next = current.next;
+        current.next = newNode;
+    
+        return head;
+    }
+}

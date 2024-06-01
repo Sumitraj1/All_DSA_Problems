@@ -1,0 +1,63 @@
+Given an array arr[] of N positive integers. Find an integer denoting the maximum XOR subset value in the given array arr[].
+
+Example 1:
+
+Input : 
+N = 3
+arr[] = {2, 4, 5}
+Output : 7
+Explanation : 
+The subset {2, 5} has maximum 
+subset XOR value.
+Example 2 :
+
+Input : 
+N= 3
+arr[] = {9, 8, 5}
+Output : 13
+Explanation : 
+The subset {8, 5} has maximum 
+subset XOR value.
+Your Task :
+You don't need to read input or print anything. Your task is to complete the function maxSubsetXOR() which takes the array and an integer as input and returns the maximum subset XOR value.
+ 
+Expected Time Complexity : O(N*Log(max(arr[i])))
+Expected Auxiliary Space : O(1)
+ 
+Contraints :
+1 <= N <= 105
+1 <= arr[i] <= 106
+
+
+
+class Solution
+{
+    public static int maxSubsetXOR(int arr[], int N)
+    {
+        //add code here.
+         int res=0;
+        Arrays.sort(arr);
+        while(true)
+        {
+            int max=arr[N-1];
+            for(int i=0;i<N;i++)
+            {
+                    if(max<arr[i])
+                    {
+                        max=arr[i];
+                    }
+            }
+           
+            if(max==0)
+            {
+                return res;
+            }
+            res=Math.max(res,res^max);
+            for(int i=0;i<N;i++)
+            {
+                    arr[i]=Math.min(arr[i],arr[i]^max);
+                     System.out.println(arr[i]);
+            }
+        }
+    }
+}

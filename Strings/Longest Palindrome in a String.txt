@@ -1,0 +1,49 @@
+Given a string S, find the longest palindromic substring in S. Substring of string S: S[ i . . . . j ] where 0 ≤ i ≤ j < len(S). Palindrome string: A string that reads the same backward. More formally, S is a palindrome if reverse(S) = S. In case of conflict, return the substring which occurs first ( with the least starting index).
+
+Example 1:
+
+Input:
+S = "aaaabbaa"
+Output: aabbaa
+Explanation: The longest Palindromic
+substring is "aabbaa".
+Example 2:
+
+Input: 
+S = "abc"
+Output: a
+Explanation: "a", "b" and "c" are the 
+longest palindromes with same length.
+The result is the one with the least
+starting index.
+
+class Solution{
+    static String longestPalin(String S){
+        // code here 
+        if (S == null || S.length() == 0) {
+            return "";
+        }
+        String longest = "";
+        for (int i = 0; i < S.length(); i++) {
+            // For odd-length palindromes
+            String palindrome1 = expandAroundCenter(S, i, i);
+            if (palindrome1.length() > longest.length()) {
+                longest = palindrome1;
+            }
+            // For even-length palindromes
+            String palindrome2 = expandAroundCenter(S, i, i + 1);
+            if (palindrome2.length() > longest.length()) {
+                longest = palindrome2;
+            }
+        }
+        return longest;
+    }
+    
+    public static String expandAroundCenter(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return s.substring(left + 1, right);
+    }
+}

@@ -1,0 +1,75 @@
+Find the largest rectangular area possible in a given histogram where the largest rectangle can be made of a number of contiguous bars. For simplicity, assume that all bars have the same width and the width is 1 unit, there will be N bars height of each bar will be given by the array arr.
+
+Example 1:
+
+Input:
+N = 7
+arr[] = {6,2,5,4,5,1,6}
+Output: 12
+Explanation: In this example the largest area would be 12 of height 4 and width 3. We can achieve this 
+area by choosing 3rd, 4th and 5th bars.
+
+
+
+
+
+
+class pair{
+    int first;
+    int second;
+    pair(int first,int second){
+        this.first=first;
+        this.second=second;
+    }
+}
+
+class Solution
+{
+    //Function to find largest rectangular area possible in a given histogram.
+    public static long getMaxArea(long hist[], long n) 
+    {
+        // your code here
+        
+        int left[]=new int[(int)n];
+        int right[]=new int[(int)n];
+        
+        Stack<pair> s1=new Stack<>();
+        for(int i=0;i<n;i++){
+            
+            
+                while(!s1.isEmpty() && s1.peek().first>=hist[i]){
+                    s1.pop();
+                }
+                 if(s1.isEmpty()){
+                    left[i]=-1;
+                 }
+                 else{
+                     left[i]=s1.peek().second;
+                 }
+            
+            s1.push(new pair((int)hist[i],i));
+        }
+        Stack<pair> s2=new Stack<>();
+        for(int i=(int)n-1;i>=0;i--){
+            while(!s2.isEmpty() && s2.peek().first>=hist[i]){
+                    s2.pop();
+                }
+                 if(s2.isEmpty()){
+                    right[i]=(int)n;
+                 }
+                 else{
+                     right[i]=s2.peek().second;
+                 }
+            
+            s2.push(new pair((int)hist[i],i));
+        }
+        long maxarea=0;
+        for(int i=0;i<n;i++){
+            long width=right[i]-left[i]-1;
+            long area=hist[i]*width;
+            maxarea=Math.max(maxarea,area);
+        }
+        return maxarea;
+    }
+        
+}

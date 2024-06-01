@@ -1,0 +1,40 @@
+A step array is an array of integers where each element has a difference of at most k with its neighbor. Given a key x, we need to find the index value of x if multiple elements exist, and return the first occurrence of the key.
+
+Example 1:
+
+Input : arr[ ] = {4, 5, 6, 7, 6}, K = 1 
+        and X = 6
+Output : 2
+Explanation:
+In an array arr 6 is present at index 2.
+So, return 2.
+
+
+
+class Complete{
+    
+   
+    // Function for finding maximum and value pair
+    public static int search (int a[], int n, int x, int k) {
+        //Complete the function
+        int ans=-1;
+        int i=0;
+        while(i<n){
+            if(a[i]==x){
+                ans= i;
+                break;
+                
+            }
+            else{
+                int y=Math.abs(a[i]-x)/k;
+                int z=Math.max(1,y);
+                i=i+z;
+                
+            }
+        }
+        return ans;
+    }
+    
+    
+}
+

@@ -1,0 +1,68 @@
+Problem Statement
+Given a sorted array and a and a value x, find the ceiling of x in the array. The ceiling of x is the smallest element in the array greater than or equal to x. Output 1 if the ceiling doesn’t exist.
+
+Example 1
+
+Input : a[] = {1, 3, 9, 15, 15, 18, 21}, x = 0
+Output : 1
+1 is the smallest element in the array greater than or equal to 5.
+Example 2
+
+Input : a[] = {1, 3, 9, 15, 15, 18, 21}, x = 1
+Output : 1
+1 is the smallest element in the array greater than or equal to 1.
+Example 3:
+
+Input : a[] = {1, 3, 9, 15, 15, 18, 21}, x = 5
+Output : 9
+9 is the smallest element in the array greater than or equal to 5.
+Example 4:
+
+Input : a[] = {1, 3, 9, 15, 15, 18, 21}, x = 25
+Output : -1
+Ceiling doesn't exist
+
+Find the ceiling of an element in a sorted array using Binary Search
+Given that the array is sorted, we can apply binary search to find the ceiling of the element. Let’s look at the implementation:
+
+import java.util.Scanner;
+
+class CeilOfElementInSortedArray {
+    private static int findCeilBinarySearch(int[] a, int x) {
+        int n = a.length;
+        int start = 0;
+        int end = n-1;
+
+        int ceil = -1;
+
+        while(start <= end) {
+            int mid = (start+end)/2;
+
+            if(x == a[mid]) {
+                // a[mid] is the ceiling
+                return a[mid];
+            } else if (x < a[mid]) {
+                // a[mid] is the smallest element found so far that is greater than x. So it is a candidate for the ceiling of x
+                ceil = a[mid];
+                end = mid-1;
+            } else {
+                start = mid+1;
+            }
+        }
+
+        return ceil;
+    }
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        int n = keyboard.nextInt();
+        int[] a = new int[n];
+        for(int i = 0; i < n; i++) {
+          a[i] = keyboard.nextInt(); 
+        }
+        int x = keyboard.nextInt();
+        keyboard.close();
+
+        System.out.printf("Ceil(%d) = %d%n", x, findCeilBinarySearch(a, x));
+    }
+}

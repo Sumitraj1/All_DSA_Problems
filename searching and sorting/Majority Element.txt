@@ -1,0 +1,71 @@
+Given an array A of N elements. Find the majority element in the array. A majority element in an array A of size N is an element that appears more than N/2 times in the array.
+ 
+
+Example 1:
+
+Input:
+N = 3 
+A[] = {1,2,3} 
+Output:
+-1
+Explanation:
+Since, each element in 
+{1,2,3} appears only once so there 
+is no majority element.
+
+
+class Solution
+{
+    static int majorityElement(int a[], int size)
+    {
+//timecomlexity=O(N)
+//space complexity=O(N)
+        // your code here
+        // int val=size/2;
+        // Map<Integer,Integer> map=new HashMap<>();
+        // for(int i=0;i<size;i++){
+        //       if(map.containsKey(a[i])){
+        //         map.put(a[i], map.get(a[i])+1);
+        //     }
+        //     else{
+        //         map.put(a[i],1);
+        //     }
+        //     if(map.containsKey(a[i])&&map.get(a[i])>size/2){
+        //         return a[i];
+        //     }
+            
+        // }
+        // return -1;
+        
+
+timecomlexity=O(N)
+spacecomlexity=O(1)
+
+        int ma=a[0];
+        int count=1;
+        for(int i=0;i<size;i++){
+            if(a[i]==ma){
+                count++;
+            }
+            else{
+                count--;
+            }
+            if(count==0){
+                ma=a[i];
+                count=1;
+            }
+        }
+        
+        int c=0;
+        for(int i=0;i<size;i++){
+            if(a[i]==ma){
+                c++;
+            }
+        }
+        if(c>size/2){
+            return ma;
+        }
+        return -1;
+        
+    }
+}

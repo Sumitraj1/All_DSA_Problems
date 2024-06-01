@@ -1,0 +1,115 @@
+Given two unsorted arrays A of size N and B of size M of distinct elements, the task is to find all pairs from both arrays whose sum is equal to X.
+
+Note: All pairs should be printed in increasing order of u. For eg. for two pairs (u1,v1) and (u2,v2), if u1 < u2 then
+(u1,v1) should be printed first else second.
+
+Example 1:
+
+Input:
+A[] = {1, 2, 4, 5, 7}
+B[] = {5, 6, 3, 4, 8} 
+X = 9 
+Output: 
+1 8
+4 5 
+5 4
+Explanation:
+(1, 8), (4, 5), (5, 4) are the
+pairs which sum to 9.
+
+
+/*
+class pair  {  
+    long first, second;  
+    public pair(long first, long second)  
+    {  
+        this.first = first;  
+        this.second = second;  
+    }  
+}
+*/
+
+class Solution {
+    public pair[] allPairs( long A[], long B[], long N, long M, long X) {
+        // Your code goes here 
+        //  Arrays.sort(A);
+        // Arrays.sort(B);
+        
+        // ArrayList<pair> pairs=new ArrayList<pair>();
+        
+        // int low=0, high=(int)M-1;
+        
+        // while(low<N && high>=0) {
+        //     if(A[low]+B[high]==X) {
+        //         pair p=new pair(A[low], B[high]);
+        //         pairs.add(p);
+        //         low++;
+        //         high--;
+        //     }else if(A[low]+B[high]>X) {
+        //         high--;
+        //     }else{
+        //         low++;
+        //     }
+        // }
+        
+        // pair[] result=new pair[pairs.size()];
+        
+        // for(int i=0; i<pairs.size(); i++) {
+        //     result[i]=pairs.get(i);
+        // }
+        
+        // return result;
+        
+        
+        
+        
+        
+        
+        // HashMap<Long, Integer> map= new HashMap<>();
+        
+        // ArrayList<ArrayList<Long>> arr= new ArrayList<>();
+        
+        // Arrays.sort(A);
+        
+        // for(int i=0; i<B.length; i++){
+        //     map.put(B[i], map.getOrDefault(B[i],0)+1);
+        // }
+        
+        
+        // for(long e: A){
+        //     long key= X- e;
+            
+        //     if(map.containsKey(key)){
+        //         arr.add(new ArrayList<Long>(Arrays.asList(e,key)));
+                
+        //     }
+            
+        // }
+        
+        // pair[] result= new pair[arr.size()];
+        
+        // for(int i=0; i<arr.size(); i++){
+            
+        //     result[i]= new pair(arr.get(i).get(0), arr.get(i).get(1)) ;
+            
+        // }
+        
+        // return result;
+        
+         Arrays.sort(A);
+        Arrays.sort(B);
+          ArrayList<pair>list=new ArrayList<>();
+     
+       int anss = 0;
+        for(int i=0;i<N;i++){
+            for(int j=0;j<B.length;j++) {
+                anss = (int) A[i] + (int) B[j];
+                if(anss == X){
+                  list.add(new pair(A[i],B[j]));
+                }
+            }
+        }
+           pair[] pair=new pair[list.size()];
+       return list.toArray(pair);
+    }
+}

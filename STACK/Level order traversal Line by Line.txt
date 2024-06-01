@@ -1,0 +1,49 @@
+
+Input:
+          1
+        /
+       4
+     /   \
+    4     2
+Output:1 $ 4 $ 4 2 $
+
+
+
+class Level_Order_Traverse{
+        static ArrayList<ArrayList<Integer>> levelOrder(Node root){ 
+    
+    
+            ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+            Queue<Node> q = new LinkedList<>();
+            q.add(root);
+            if(root == null) {
+                return result;
+            }
+            while(!q.isEmpty()){
+                int size=q.size();
+                if(size==0){
+                    return result;
+                }
+                ArrayList<Integer> list = new ArrayList<Integer>();
+                while(size>0){
+                    Node temp=q.poll();
+                    if(temp==null){
+                        return result;
+                    }
+                    list.add(temp.data);
+                    
+                    if(temp.left!=null){
+                        q.add(temp.left);
+                    }
+                    if(temp.right!=null){
+                        q.add(temp.right);
+                    }
+                    size--;
+                }
+                result.add(list);
+                
+            }
+            return result;
+
+    }
+}

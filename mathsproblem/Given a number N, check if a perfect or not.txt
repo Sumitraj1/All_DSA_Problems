@@ -1,0 +1,57 @@
+Given a number N, check if a number is perfect or not. A number is said to be perfect if sum of all its factors excluding the number itself is equal to the number. Return 1 if the number is Perfect otherwise return 0.
+
+Example 1:
+
+Input:
+N = 6
+Output:
+1 
+Explanation:
+Factors of 6 are 1, 2, 3 and 6.
+Excluding 6 their sum is 6 which
+is equal to N itself. So, it's a
+Perfect Number.
+
+
+class Solution {
+    static int isPerfectNumber(long N) {
+        // code here
+        // int sum=0;
+        // for(int i=1;i<=N;i++){
+        //     if(N%i==0){
+        //         sum+=i;
+        //     }
+        // }
+        // Long a=N*2;
+        // if(a==sum){
+        //     return 1;
+        // }
+        // return 0;
+        
+       long sum=0;
+        
+        
+        for(long i=1;i<= Math.sqrt(N);i++){
+            if(N%i==0){
+                
+                if(N/i==N){
+                    sum=sum+i;
+                }
+                else{
+                     sum=sum+i+(N/i);
+                }
+               
+                
+               
+            }
+        }
+        
+        if(sum==N && N>1){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    
+}

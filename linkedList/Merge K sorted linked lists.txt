@@ -1,0 +1,60 @@
+Given K sorted linked lists of different sizes. The task is to merge them in such a way that after merging they will be a single sorted linked list.
+
+Example 1:
+
+Input:
+K = 4
+value = {{1,2,3},{4 5},{5 6},{7,8}}
+Output: 1 2 3 4 5 5 6 7 8
+Explanation:
+The test case has 4 sorted linked 
+list of size 3, 2, 2, 2
+1st    list     1 -> 2-> 3
+2nd   list      4->5
+3rd    list      5->6
+4th    list      7->8
+The merged list will be
+1->2->3->4->5->5->6->7->8.
+
+class Solution
+{
+    //Function to merge K sorted linked list.
+    static Node merge(Node a,Node b){
+        Node result=null;
+        if(a==null){
+            return b;
+        }
+        else if(b==null){
+            return a;
+        }
+        if(a.data<b.data){
+            result=a;
+            result.next=merge(a.next,b);
+        }
+        else{
+              result=b;
+            result.next=merge(a,b.next);
+        }
+        return result;
+    }
+    Node mergeKList(Node[]arr,int K)
+    {
+        //Add your code here.
+        int i=0;
+        int last=K-1;
+        int j;
+        while(last!=0){
+            i=0;
+            j=last;
+            while(i<j){
+                arr[i]=merge(arr[i],arr[j]);
+                i++;
+                j--;
+                if(i>=j){
+                    last=j;
+                }
+            }
+        }
+        return arr[0];
+    }
+}

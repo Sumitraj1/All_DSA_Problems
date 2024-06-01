@@ -1,0 +1,90 @@
+
+Given an array A containing 2*N+2 positive numbers, out of which 2*N numbers exist in pairs whereas the other two number occur exactly once and are distinct. Find the other two numbers. Return in increasing order.
+
+Example 1:
+
+Input: 
+N = 2
+arr[] = {1, 2, 3, 2, 1, 4}
+Output:
+3 4 
+Explanation:
+3 and 4 occur exactly once.
+
+
+
+class Solution
+{
+    public int[] singleNumber(int[] nums)
+    {
+        // Code here
+    //     int n=nums.length;
+    //   ArrayList<Integer> l1=new ArrayList<>();
+    //     HashMap<Integer,Integer> hm=new HashMap<>();
+    //     for(int i=0;i<n;i++){
+    //         hm.put(nums[i],hm.getOrDefault(nums[i],0)+1);
+    //     }
+        
+    //       for(int key : hm.keySet()){
+    //         if(hm.get(key) == 1){
+    //             l1.add(key);
+    //         }
+    //     }
+    //     int[]ans = new int[l1.size()];
+    //     for (int i = 0; i < l1.size(); i++) {
+    //         ans[i] = l1.get(i);
+    //     }
+    //     Arrays.sort(ans);
+        
+    //     return ans;
+    
+    
+    
+    //USING HASHSET
+    // HashSet<Integer> hs=new HashSet<>();
+    // int n=nums.length;
+    // for(int i=0;i<n;i++){
+    //     if(hs.contains(nums[i])){
+    //         hs.remove(nums[i]);
+    //     }
+    //     else{
+    //         hs.add(nums[i]);
+    //     }
+    // }
+    //   int arr[] = new int[2];
+    //     int k = 0;
+    //     for(int i : hs)
+    //     arr[k++] = i;
+    //     if(arr[0] > arr[1]){
+    //         int temp = arr[0];
+    //         arr[0] = arr[1];
+    //         arr[1] = temp;
+    //     }
+    //     return arr;
+    
+    
+    
+    //USING BIT MANIPULATIONS
+    int n=nums.length;
+    int sum=0;
+    for(int i=0;i<n;i++){
+        sum=sum^nums[i];
+    }
+    
+    int pos=sum & -sum;
+    int oneset=0;
+    int zeroset=0;
+    for(int s:nums){
+        if((s & pos)==0){
+            zeroset=zeroset^s;
+        }
+        else{
+            oneset=oneset^s;
+        }
+    }
+    return new int[]{zeroset<oneset?zeroset:oneset,oneset>=zeroset?oneset:zeroset};
+    
+   
+    
+    }
+}

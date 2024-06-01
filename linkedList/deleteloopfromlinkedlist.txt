@@ -1,0 +1,52 @@
+class Solution
+{
+    //Function to remove a loop in the linked list.
+    public static void removeLoop(Node head){
+        // code here
+        // remove the loop without losing any nodes
+        Node loop=findfirstnode(head);
+        if(loop==null){
+            return;
+        }
+        Node temp=loop;
+        while(temp.next!=loop){
+            temp=temp.next;
+        }
+        temp.next=null;
+        return;
+    }
+	
+	//find node where the loop starts
+	
+   static   Node findfirstnode(Node head){
+        if(head.next==head){
+            return head;
+        }
+       Node slow=head;
+       Node intersection=detectLoop(head);
+       if(intersection==null){
+           return null;
+       }
+       
+    while(intersection!=slow){
+        
+        intersection=intersection.next;
+           slow=slow.next;
+       }    
+         
+         return slow;
+    }
+	//detect loop (loop present or not)
+
+      static Node detectLoop(Node head){
+         Node slow=head;
+         Node fast=head;
+         while(fast!=null && fast.next!=null){
+             slow=slow.next;
+             fast=fast.next.next;
+             if(slow==fast){
+                 return slow;
+             }
+         }
+         return null;
+     }

@@ -1,0 +1,60 @@
+
+Given two arrays a[] and b[] respectively of size n and m, the task is to print the count of elements in the intersection (or common elements) of the two arrays.
+
+For this question, the intersection of two arrays can be defined as the set containing distinct common elements between the two arrays. 
+
+Example 1:
+
+Input:
+n = 5, m = 3
+a[] = {89, 24, 75, 11, 23}
+b[] = {89, 2, 4}
+
+Output: 1
+
+Explanation: 
+89 is the only element 
+in the intersection of two arrays.
+
+
+
+class Solution {
+    // Function to return the count of the number of elements in
+    // the intersection of two arrays.
+    public static int NumberofElementsInIntersection(int a[], int b[], int n, int m) {
+        // Your code here
+        HashMap<Integer,Integer> hm=new HashMap<Integer,Integer>();
+        for(int i=0;i<n;i++){
+            hm.put(a[i],hm.getOrDefault(a[i],0)+1);
+        }
+        
+        int count=0;
+        for(int i=0;i<m;i++){
+            if(hm.containsKey(b[i]) && hm.get(b[i])!=0){
+                count++;
+                hm.put(b[i],0);
+            }
+        }
+        return count;
+
+
+
+	//USING HASHSET
+
+	HashSet<Integer>hs=new HashSet<>();
+        for(int i=0;i<n;i++){
+            hs.add(a[i]);
+        }
+        
+        int count=0;
+        for(int i=0;i<m;i++){
+            if(hs.contains(b[i])){
+                count++;
+                hs.remove(b[i]);
+            }
+        }
+        return count;
+
+
+    }
+};

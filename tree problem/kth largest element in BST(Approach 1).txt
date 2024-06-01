@@ -1,0 +1,33 @@
+class Solution
+{
+      ArrayList<Integer> list=new ArrayList<>();
+    // return the Kth largest element in the given BST rooted at 'root'
+    public void solve(Node root)
+
+    {
+
+        if(root==null) return;
+
+        solve(root.left);
+
+        list.add(root.data);
+
+        solve(root.right);
+
+    }
+   
+
+    public int kthLargest(Node root,int k)
+
+    {
+
+        //Your code here
+        
+        
+        if(root==null) return 0;
+
+        solve(root);
+
+        return list.get(list.size()-k);
+    }
+}

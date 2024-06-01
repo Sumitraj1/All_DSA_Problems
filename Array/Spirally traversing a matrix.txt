@@ -1,0 +1,118 @@
+Given a matrix of size r*c. Traverse the matrix in spiral form.
+
+Example 1:
+
+Input:
+r = 4, c = 4
+matrix[][] = {{1, 2, 3, 4},
+           {5, 6, 7, 8},
+           {9, 10, 11, 12},
+           {13, 14, 15,16}}
+Output: 
+1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
+Explanation:
+
+Example 2:
+
+Input:
+r = 3, c = 4  
+matrix[][] = {{1, 2, 3, 4},
+           {5, 6, 7, 8},
+           {9, 10, 11, 12}}
+Output: 
+1 2 3 4 8 12 11 10 9 5 6 7
+Explanation:
+Applying same technique as shown above, 
+output for the 2nd testcase will be 
+1 2 3 4 8 12 11 10 9 5 6 7.
+
+Your Task:
+You dont need to read input or print anything. Complete the function spirallyTraverse() that takes matrix, r and c as input parameters and returns a list of integers denoting the spiral traversal of matrix. 
+
+Expected Time Complexity: O(r*c)
+Expected Auxiliary Space: O(r*c), for returning the answer only.
+
+Constraints:
+1 <= r, c <= 100
+0 <= matrixi <= 100
+
+
+
+
+class Solution
+{
+    //Function to return a list of integers denoting spiral traversal of matrix.
+    static ArrayList<Integer> spirallyTraverse(int matrix[][], int r, int c)
+    {
+        // code here 
+        ArrayList<Integer> ans=new ArrayList<Integer>();
+        int top=0;
+        int left=0;
+        int right=c-1;
+        int bottom=r-1;
+        while(top<=bottom && left<=right){
+            for(int i=left;i<=right;i++){
+                ans.add(matrix[top][i]);
+            }
+            top++;
+            for(int i=top;i<=bottom;i++){
+                ans.add(matrix[i][right]);
+            }
+            right--;
+            if(top<=bottom){
+                for(int i=right;i>=left;i--){
+                    ans.add(matrix[bottom][i]);
+                }
+                bottom--;
+            }
+            if(left<=right){
+                for(int i=bottom;i>=top;i--){
+                    ans.add(matrix[i][left]);
+                    
+                }
+                left++;
+            }
+        }
+        return ans;
+        
+        //  int startrow=0;
+        // int endrow=r-1;
+        // int startcol=0;
+        // int endcol=c-1;
+        
+        // ArrayList<Integer> al=new ArrayList<>();
+        
+        // while(startrow<=endrow && startcol<=endcol){
+            
+        //     for(int j=startcol;j<=endcol;j++){
+        //         al.add(matrix[startrow][j]);
+        //     }
+        //      startrow++;
+            
+        //     for(int i=startrow;i<=endrow;i++){
+        //         al.add(matrix[i][endcol]);
+        //     }
+
+        //     endcol--;
+        //   if(startrow<=endrow)  {
+        //     for(int k=endcol;k>=startcol;k--){
+
+        //         al.add(matrix[endrow][k]);
+        //     }
+        //     endrow--;
+        // }
+            
+        //     if(startcol<=endcol){
+            
+        //     for(int l=endrow;l>=startrow;l--){
+  
+        //         al.add(matrix[l][startcol]);
+                
+        //     }
+        //     startcol++;
+   
+        // }
+            
+        // }
+        // return al;
+        
